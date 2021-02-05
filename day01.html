@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 组件的运用 -->
+    <div id="app1">
+        <ol>
+            <todo-item v-for="item in List" :key="item.id" v-bind:todo="item"></todo-item>
+        </ol>
+    </div>
+    <!-- 模板语法 -->
+    <div id="dpp2">
+        <p>1:{{message}}</p>
+        <p>2:<span v-html="message"></span></p>
+    </div>
+    <!-- 计算属性 -->
+    <div id="app3">
+        <p>1:{{message}}</p>
+        <p>2:{{reservmessage}}</p>
+    </div>
+    <!-- 侦听属性 -->
+    <div id="app4">{{fullName}}</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    Vue.component("todo-item", {
+        props: ["todo"],
+        template: "<li>{{todo.text}}</li>",
+    });
+    var vm1 = new Vue({
+        el: "#app1",
+        data: {
+            List: [
+                { id: 0, text: "shucai" },
+                { id: 1, text: "daconh" },
+                { id: 2, text: "shuiguo" },
+            ],
+        },
+    });
+    //
+    var vm2 = new Vue({
+        el: "#app",
+        data: {
+            message: '<span style="color:red">3</span>',
+        },
+    });
+    //计算属性
+    var vm3 = new Vue({
+        el: "#app3",
+        data: {
+            message: "Hello",
+        },
+        computed: {
+            reservmessage: function () {
+                return this.message.split("").reverse().join("");
+            },
+        },
+    });
+    //侦听属性
+    var vm4 = new Vue({
+        el: "#app4",
+        //   侦听属性watch
+          data: {
+            firstName: "Foo",
+            lastName: "to",
+            fullName: "Foo to"
+          },
+          watch: {
+            firstName: function (val) {
+              this.fullName = val + ' ' + this.lastName
+            },
+            lastName: function (val) {
+              this.fullName = this.firstName + ' ' + val
+            },
+          },
+
+        //   计算属性computed
+        //   data: {
+        //     firstName: "Foo",
+        //     lastName: "Bar",
+        //   },
+        //   computed:{
+        //       fullName:function(){
+        //           return this.firstName+ ' '+this.lastName
+        //       }
+        //   }
+
+        //计算属性setter
+        // data: {
+        //     firstName: "Foo",
+        //     lastName: "Bar",
+        // },
+        // computed:{
+        //     fullName:{
+        //         //getter
+        //         get: function(){
+        //             return this.firstName+ ' '+this.lastName
+        //         },
+        //         //setter
+        //         set:function(val){
+        //             var names = val.split('')
+        //             this.firstName = names[0]
+        //             this.lastName = names[names.length-1]
+        //         }
+        //     }
+        // }
+    });
+</script>
+
+</html>

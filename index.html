@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">{{message}}</div>
+    <div id="app-2">
+      <span :title="message"> 2 </span>
+    </div>
+    <div id="app-3">
+      <p v-if="seen">3</p>
+    </div>
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">{{todo.text}}</li>
+      </ol>
+    </div>
+    <div id="app-5">
+      <p>{{message}}</p>
+      <button @click="reservmessage">反转消息</button>
+    </div>
+    <div id="app6">
+      <p>{{message}}</p>
+      <input v-model="message" >
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello,World",
+      },
+    });
+    var vm2 = new Vue({
+      el: "#app-2",
+      data: {
+        message: "页面加载" + new Date().toLocaleString(),
+      },
+    });
+    var vm3 = new Vue({
+      el: "#app-3",
+      data: {
+        seen: true,
+      },
+    });
+    var vm4 = new Vue({
+      el: "#app-4",
+      data: {
+        todos: [{ text: "1" }, { text: "1" }, { text: "1" }],
+      },
+    });
+    var vm5 = new Vue({
+      el: "#app-5",
+      data: {
+        message: "Hello,World!",
+      },
+      methods: {
+        reservmessage: function () {
+          this.message = this.message.split("").reverse().join("");
+        },
+      },
+    });
+    var vm6 = new Vue({
+      el: "#app6",
+      data: {
+        message: "Hello,World"
+      },
+    });
+  </script>
+</html>
